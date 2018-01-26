@@ -22,5 +22,5 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/xoroshiro
+    xoroshiro128p_source.h DESTINATION include/xoroshiro
 )

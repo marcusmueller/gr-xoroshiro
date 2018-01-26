@@ -26,6 +26,7 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND xoroshiro_sources
+    xoroshiro128p_source_impl.cc
 )
 
 set(xoroshiro_sources "${xoroshiro_sources}" PARENT_SCOPE)

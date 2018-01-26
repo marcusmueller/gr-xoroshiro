@@ -8,6 +8,9 @@
 %include "xoroshiro_swig_doc.i"
 
 %{
+#include "xoroshiro/xoroshiro128p_source.h"
 %}
 
 
+%include "xoroshiro/xoroshiro128p_source.h"
+GR_SWIG_BLOCK_MAGIC2(xoroshiro, xoroshiro128p_source);
