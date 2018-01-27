@@ -24,12 +24,13 @@
 
 #include <gnuradio/io_signature.h>
 #include "xoroshiro128p_source_impl.h"
+#include "xoroshiro/xoroshiro-variates.h"
 
 namespace gr {
   namespace xoroshiro {
 
     xoroshiro128p_source::sptr
-    xoroshiro128p_source::make(seed, iterations)
+    xoroshiro128p_source::make(uint64_t seed, uint32_t iterations)
     {
       return gnuradio::get_initial_sptr
         (new xoroshiro128p_source_impl(seed, iterations));
@@ -38,11 +39,14 @@ namespace gr {
     /*
      * The private constructor
      */
-    xoroshiro128p_source_impl::xoroshiro128p_source_impl(seed, iterations)
+    xoroshiro128p_source_impl::xoroshiro128p_source_impl(uint64_t seed, uint32_t iterations)
       : gr::sync_block("xoroshiro128p_source",
               gr::io_signature::make(0, 0, 0),
-              gr::io_signature::make(<+MIN_OUT+>, <+MAX_OUT+>, sizeof(<+OTYPE+>)))
-    {}
+                       gr::io_signature::make(1, 1, sizeof(float))),
+      iterations(iterations)
+    {
+      xoroshiro128p_seed(state, seed);
+    }
 
     /*
      * Our virtual destructor.
@@ -56,7 +60,9 @@ namespace gr {
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
-      <+OTYPE+> *out = (<+OTYPE+> *) output_items[0];
+      float *out = (float*) output_items[0];
+      for(int i = 0; i < noutput_items; i++)
+        *(out++) = xoroshiro128p_cltf(state, iterations);
 
       // Do <+signal processing+>
 

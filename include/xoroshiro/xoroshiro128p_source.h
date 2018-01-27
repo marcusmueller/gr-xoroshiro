@@ -29,7 +29,9 @@ namespace gr {
   namespace xoroshiro {
 
     /*!
-     * \brief <+description of block+>
+     * \brief A XOROSHIRO128+-based Gaussian Noise source
+     * It uses the power of the Central Limit Theorem.
+     * Why? Because I can, and to show that our fastnoise source is bad.
      * \ingroup xoroshiro
      *
      */
@@ -46,7 +48,7 @@ namespace gr {
        * class. xoroshiro::xoroshiro128p_source::make is the public interface for
        * creating new instances.
        */
-      static sptr make(seed = 1, iterations = 64);
+      static sptr make(uint64_t seed = 1, uint32_t iterations = 64);
     };
 
   } // namespace xoroshiro

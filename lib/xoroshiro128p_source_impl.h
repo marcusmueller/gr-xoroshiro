@@ -29,10 +29,10 @@ namespace gr {
     class xoroshiro128p_source_impl : public xoroshiro128p_source
     {
      private:
-      // Nothing to declare in this block.
-
+      uint64_t state[2];
+      uint32_t iterations;
      public:
-      xoroshiro128p_source_impl(seed, iterations);
+      xoroshiro128p_source_impl(uint64_t seed, uint32_t iterations);
       ~xoroshiro128p_source_impl();
 
       // Where all the action really happens
